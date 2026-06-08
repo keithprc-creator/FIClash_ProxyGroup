@@ -1,14 +1,25 @@
 name: LinkedIn 亚太路由
-desc: 为 LinkedIn 创建独立代理组，默认走亚太节点(JP/TW/HK/SG/KR)，DIRECT 兜底
+desc: LinkedIn 默认走亚太节点中最快的(自动测速)，可手动切换到指定节点或 DIRECT
 category: 分流规则
 
 proxy-groups:
-  - name: LinkedIn
-    type: select
+  # 内层：自动测速组，定期测试亚太节点延迟，自动选最快
+  - name: LinkedIn-Auto
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300        # 每 5 分钟测一次
+    tolerance: 50        # 切换容差(ms)，新节点比当前快至少 50ms 才切换，避免抖动
     include-all: true
     filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|亚太|Asia)"
+
+  # 外层：选择组，第一个选项是 Auto(自动选最快)，其余是手动备选
+  - name: LinkedIn
+    type: select
     proxies:
-      - DIRECT  # 兜底，列在自动填充的亚太节点之后
+      - LinkedIn-Auto    # 默认：自动选最快的亚太节点
+      - DIRECT           # 手动切到直连
+    include-all: true
+    filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|亚太|Asia)"
 
 rules:
   - DOMAIN-SUFFIX,linkedin.com,LinkedIn
