@@ -1,0 +1,35 @@
+name: OneDrive 自动选速
+desc: OneDrive 自动选最快节点(亚太+北美+欧洲都参与测速)，可手动切 DIRECT
+category: 分流规则
+
+proxy-groups:
+  # 内层：自动测速组，不限地区，从全部代理节点里测延迟选最快
+  - name: OneDrive-Auto
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300        # 每 5 分钟测一次
+    tolerance: 50        # 切换容差(ms)，避免节点抖动
+    include-all: true
+    # 覆盖常见地区前缀，让亚太/北美/欧洲都参与竞争最快
+    filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|US|United[ -]?States|美国|UK|英国|FR|DE|德|法|亚太|Asia|Europe|欧)"
+
+  # 外层：选择组，规则真正命中目标
+  - name: OneDrive
+    type: select
+    proxies:
+      - OneDrive-Auto    # 默认：自动选最快
+      - DIRECT           # 手动切到直连
+
+rules:
+  # OneDrive 个人版
+  - DOMAIN-SUFFIX,onedrive.live.com,OneDrive
+  - DOMAIN-SUFFIX,1drv.com,OneDrive
+  - DOMAIN-SUFFIX,1drv.ms,OneDrive
+  - DOMAIN-SUFFIX,storage.live.com,OneDrive
+  - DOMAIN-SUFFIX,skyapi.live.net,OneDrive
+  - DOMAIN-SUFFIX,files.1drv.com,OneDrive
+  - DOMAIN-SUFFIX,p.rfd.msft.net,OneDrive
+  # OneDrive 商业版/SharePoint
+  - DOMAIN-SUFFIX,sharepoint.com,OneDrive
+  # 关键字兜底
+  - DOMAIN-KEYWORD,onedrive,OneDrive
