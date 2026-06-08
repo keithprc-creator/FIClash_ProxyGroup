@@ -1,13 +1,6 @@
-# Stash Override: LinkedIn → Asia-Pacific
-#
-# 用途：为 LinkedIn 创建一个独立代理组，默认走亚太节点（JP/TW/HK/SG/KR），
-#       DIRECT 作为兜底放在最后。
-#
-# 用法：在 Stash iOS App 中：
-#   配置 → 选中订阅 → 覆写 → 添加覆写 → 粘贴 raw URL：
-#   https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/linkedin-asia.yaml
-#
-# 订阅每次更新都会自动重新拉取此覆写并合并，不会被冲掉。
+name: LinkedIn 亚太路由
+desc: 为 LinkedIn 创建独立代理组，默认走亚太节点(JP/TW/HK/SG/KR)，DIRECT 兜底
+category: 分流规则
 
 proxy-groups:
   - name: LinkedIn
