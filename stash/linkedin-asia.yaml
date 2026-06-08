@@ -1,5 +1,5 @@
 name: LinkedIn 亚太路由
-desc: LinkedIn 默认走亚太节点中最快的(自动测速)，可手动切换到指定节点或 DIRECT
+desc: LinkedIn 默认走亚太节点中最快的(自动测速)，可手动切换到 DIRECT 或单个节点
 category: 分流规则
 
 proxy-groups:
@@ -12,14 +12,14 @@ proxy-groups:
     include-all: true
     filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|亚太|Asia)"
 
-  # 外层：选择组，第一个选项是 Auto(自动选最快)，其余是手动备选
+  # 外层：选择组，纯显式列表，规则真正命中的就是这个
+  # 第一项是默认选中项 → LinkedIn-Auto(自动最快)
   - name: LinkedIn
     type: select
     proxies:
       - LinkedIn-Auto    # 默认：自动选最快的亚太节点
       - DIRECT           # 手动切到直连
-    include-all: true
-    filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|亚太|Asia)"
+      - GLOBAL           # 兜底：跟随全局策略组(可选)
 
 rules:
   - DOMAIN-SUFFIX,linkedin.com,LinkedIn
