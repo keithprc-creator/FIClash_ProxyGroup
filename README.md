@@ -2,6 +2,18 @@
 
 How to add custom proxy groups (e.g. "Qoder") in FIClash (FlClash) that persist across subscription updates.
 
+## Solutions
+
+| 方案 | 目录 | 平台 | 推荐程度 |
+|---|---|---|---|
+| **[脚本模式覆写](script/)** | `script/` | FlClash macOS/Windows | **推荐** — 保留订阅组 + 追加自定义组 |
+| [SQLite 数据库覆写](#solution-database-override--api-reload) | `setup_qoder_proxy_group.sh` | FlClash macOS/Windows | ⚠️ v0.8.93 有已知问题 |
+| [Stash iOS 覆写](stash/) | `stash/` | Stash iOS | 适用于 iOS |
+
+> **⚠️ SQLite 方案注意**：FlClash v0.8.93 中 `proxy_groups` 表有数据时会触发"自定义"模式，**完全替换**订阅的代理组（而非追加）。推荐使用脚本模式覆写代替。
+
+---
+
 ## Problem
 
 FIClash manages subscription-based configs. Directly editing the profile YAML gets overwritten on next subscription update. We need a way to inject custom proxy groups and rules that survive updates.
