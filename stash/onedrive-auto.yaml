@@ -1,5 +1,5 @@
-name: OneDrive 自动选速
-desc: OneDrive 自动选最快节点(亚太+北美+欧洲都参与测速)，可手动切 DIRECT
+name: OneDrive 个人与企业分流
+desc: 个人版默认自动选速代理，企业版/SharePoint 默认 DIRECT，可分别手动切换
 category: 分流规则
 
 proxy-groups:
@@ -13,23 +13,28 @@ proxy-groups:
     # 覆盖常见地区前缀，让亚太/北美/欧洲都参与竞争最快
     filter: "(?i)(JP|Japan|日本|TW|Taiwan|台湾|HK|Hong[ -]?Kong|香港|SG|Singapore|新加坡|KR|Korea|韩国|US|United[ -]?States|美国|UK|英国|FR|DE|德|法|亚太|Asia|Europe|欧)"
 
-  # 外层：选择组，规则真正命中目标
-  - name: OneDrive
+  - name: OneDrive Personal
     type: select
     proxies:
       - OneDrive-Auto    # 默认：自动选最快
       - DIRECT           # 手动切到直连
 
+  - name: OneDrive Business
+    type: select
+    proxies:
+      - DIRECT
+      - OneDrive-Auto
+
 rules:
+  # OneDrive 企业版/SharePoint（所有租户）
+  - DOMAIN-SUFFIX,sharepoint.com,OneDrive Business
   # OneDrive 个人版
-  - DOMAIN-SUFFIX,onedrive.live.com,OneDrive
-  - DOMAIN-SUFFIX,1drv.com,OneDrive
-  - DOMAIN-SUFFIX,1drv.ms,OneDrive
-  - DOMAIN-SUFFIX,storage.live.com,OneDrive
-  - DOMAIN-SUFFIX,skyapi.live.net,OneDrive
-  - DOMAIN-SUFFIX,files.1drv.com,OneDrive
-  - DOMAIN-SUFFIX,p.rfd.msft.net,OneDrive
-  # OneDrive 商业版/SharePoint
-  - DOMAIN-SUFFIX,sharepoint.com,OneDrive
+  - DOMAIN-SUFFIX,onedrive.live.com,OneDrive Personal
+  - DOMAIN-SUFFIX,1drv.com,OneDrive Personal
+  - DOMAIN-SUFFIX,1drv.ms,OneDrive Personal
+  - DOMAIN-SUFFIX,storage.live.com,OneDrive Personal
+  - DOMAIN-SUFFIX,skyapi.live.net,OneDrive Personal
+  - DOMAIN-SUFFIX,files.1drv.com,OneDrive Personal
+  - DOMAIN-SUFFIX,p.rfd.msft.net,OneDrive Personal
   # 关键字兜底
-  - DOMAIN-KEYWORD,onedrive,OneDrive
+  - DOMAIN-KEYWORD,onedrive,OneDrive Personal

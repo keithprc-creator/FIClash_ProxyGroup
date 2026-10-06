@@ -11,7 +11,7 @@ Stash 不支持在 App 内本地编辑覆写 YAML，必须提供一个公网可�
 | 文件 | 用途 | Raw URL |
 |---|---|---|
 | `linkedin-asia.yaml` | LinkedIn 走亚太节点（JP/TW/HK/SG/KR），DIRECT 兜底 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/linkedin-asia.yaml` |
-| `onedrive-auto.yaml` | OneDrive 全球节点自动测速选最快（亚太+北美+欧洲），DIRECT 兜底 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/onedrive-auto.yaml` |
+| `onedrive-auto.yaml` | OneDrive 个人版默认自动选速代理，企业版/SharePoint 默认 DIRECT | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/onedrive-auto.yaml` |
 | `teams-direct.yaml` | Microsoft Teams 默认 DIRECT，可通过 Teams-Nodes 手动切换订阅节点 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/teams-direct.yaml` |
 
 ## 添加覆写步骤
@@ -21,6 +21,19 @@ Stash 不支持在 App 内本地编辑覆写 YAML，必须提供一个公网可�
 3. 粘贴上表中的 raw URL
 4. 点击 **下载**
 5. 下拉刷新订阅，覆写生效
+
+## OneDrive 个人/企业分流
+
+`onedrive-auto.yaml` 按服务域名分流，不识别登录邮箱：
+
+| 策略组 | 匹配范围 | 默认选项 |
+|---|---|---|
+| OneDrive Personal | 个人版文件服务域名及 onedrive 关键字兜底 | OneDrive-Auto（自动选速代理） |
+| OneDrive Business | `sharepoint.com` 及其子域名，包含所有企业租户 | DIRECT |
+
+两个组均可独立切换 `DIRECT` / `OneDrive-Auto`。依赖 SharePoint 的 Teams Learning 连接会进入 `OneDrive Business`，不影响个人版的代理选择。共享登录服务、第三方课程平台等仍按其他规则处理，不能保证按账号拆分所有连接。
+
+已有 OneDrive 覆写请在原条目上重新下载/更新并重新加载配置，**不要保留旧版本同时添加新版本**，否则旧规则可能抢先匹配。原来的 `OneDrive` 组替换为上述两个组，旧的线路选择不再沿用，请确认新组的选项。
 
 ## YAML 格式说明
 
