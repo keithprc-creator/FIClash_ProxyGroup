@@ -34,6 +34,7 @@ FlClash v0.8.93+ 有三种覆写模式：
 | 组名 | 类型 | 说明 |
 |---|---|---|
 | Qoder | select | DIRECT 默认 + 亚太节点 (JP/TW/SG/HK) |
+| Teams | select | DIRECT 默认 + 全部订阅节点，可在代理页手动切换 |
 | OneDrive | select | 外层手动切换（默认 Auto / DIRECT / 所有节点） |
 | OneDrive Auto | url-test (hidden) | 全部节点自动选最快，180s 间隔，50ms 容差 |
 | LinkedIn | select | 同 OneDrive 结构 |
@@ -45,6 +46,11 @@ FlClash v0.8.93+ 有三种覆写模式：
 PROCESS-NAME,Qoder,Qoder
 PROCESS-NAME,QoderWork,Qoder
 PROCESS-NAME,qodercli,Qoder
+DOMAIN-SUFFIX,teams.microsoft.com,Teams
+DOMAIN-SUFFIX,teams.cloud.microsoft,Teams
+DOMAIN-SUFFIX,teams.live.com,Teams
+DOMAIN-SUFFIX,lync.com,Teams
+DOMAIN-SUFFIX,skype.com,Teams
 DOMAIN-SUFFIX,onedrive.com,OneDrive
 DOMAIN-SUFFIX,onedrive.live.com,OneDrive
 DOMAIN-SUFFIX,1drv.com,OneDrive
@@ -58,6 +64,8 @@ DOMAIN-SUFFIX,linkedin.cn,LinkedIn
 DOMAIN-SUFFIX,lnkd.in,LinkedIn
 DOMAIN-KEYWORD,linkedin,LinkedIn
 ```
+
+Teams 组默认选择 `DIRECT`，可在代理页切换到任一订阅节点。分流域名参考 [Microsoft 365 官方端点文档](https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide)；登录、Office/SharePoint 等共享服务及仅通过 IP 连接的媒体流量不一定会命中这些域名规则。
 
 ## 自定义/扩展
 

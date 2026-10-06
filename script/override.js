@@ -26,6 +26,11 @@ const main = (config) => {
       proxies: qoderProxies
     },
     {
+      name: "Teams",
+      type: "select",
+      proxies: ["DIRECT", ...allProxies]
+    },
+    {
       name: "OneDrive",
       type: "select",
       proxies: ["OneDrive Auto", "DIRECT", ...allProxies]
@@ -62,6 +67,12 @@ const main = (config) => {
     "PROCESS-NAME,Qoder,Qoder",
     "PROCESS-NAME,QoderWork,Qoder",
     "PROCESS-NAME,qodercli,Qoder",
+    // Microsoft Teams 域名
+    "DOMAIN-SUFFIX,teams.microsoft.com,Teams",
+    "DOMAIN-SUFFIX,teams.cloud.microsoft,Teams",
+    "DOMAIN-SUFFIX,teams.live.com,Teams",
+    "DOMAIN-SUFFIX,lync.com,Teams",
+    "DOMAIN-SUFFIX,skype.com,Teams",
     // OneDrive 域名
     "DOMAIN-SUFFIX,onedrive.com,OneDrive",
     "DOMAIN-SUFFIX,onedrive.live.com,OneDrive",
