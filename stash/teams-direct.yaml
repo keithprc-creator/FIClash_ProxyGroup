@@ -3,11 +3,15 @@ desc: Teams 默认直连，可手动切换至任一订阅节点
 category: 分流规则
 
 proxy-groups:
+  - name: Teams-Nodes
+    type: select
+    include-all: true
+
   - name: Teams
     type: select
     proxies:
       - DIRECT
-    include-all: true
+      - Teams-Nodes
 
 rules:
   - DOMAIN-SUFFIX,teams.microsoft.com,Teams
