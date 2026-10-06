@@ -1,0 +1,17 @@
+name: Microsoft Teams 直连优先
+desc: Teams 默认直连，可手动切换至任一订阅节点
+category: 分流规则
+
+proxy-groups:
+  - name: Teams
+    type: select
+    proxies:
+      - DIRECT
+    include-all: true
+
+rules:
+  - DOMAIN-SUFFIX,teams.microsoft.com,Teams
+  - DOMAIN-SUFFIX,teams.cloud.microsoft,Teams
+  - DOMAIN-SUFFIX,teams.live.com,Teams
+  - DOMAIN-SUFFIX,lync.com,Teams
+  - DOMAIN-SUFFIX,skype.com,Teams

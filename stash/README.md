@@ -12,6 +12,7 @@ Stash 不支持在 App 内本地编辑覆写 YAML，必须提供一个公网可�
 |---|---|---|
 | `linkedin-asia.yaml` | LinkedIn 走亚太节点（JP/TW/HK/SG/KR），DIRECT 兜底 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/linkedin-asia.yaml` |
 | `onedrive-auto.yaml` | OneDrive 全球节点自动测速选最快（亚太+北美+欧洲），DIRECT 兜底 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/onedrive-auto.yaml` |
+| `teams-direct.yaml` | Microsoft Teams 默认 DIRECT，可手动切换订阅节点 | `https://raw.githubusercontent.com/keithprc-creator/FIClash_ProxyGroup/main/stash/teams-direct.yaml` |
 
 ## 添加覆写步骤
 
@@ -37,3 +38,5 @@ Stash 覆写遵循 Clash YAML 规范，关键字段：
 | 覆写编辑 | 本地 SQLite + UI | 必须远程 URL |
 | 合并机制 | profile_rule_mapping 表的 scene='prepend' | YAML 字段合并 + rules 默认 prepend |
 | 订阅更新影响 | 数据库覆写存活 | 远程 URL 重新拉取后合并 |
+
+Teams 分流域名参考 [Microsoft 365 官方端点文档](https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide)。登录、Office/SharePoint 等共享服务及仅通过 IP 连接的媒体流量不一定会命中这些域名规则。
